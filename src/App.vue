@@ -23,7 +23,7 @@
               <li class="active"><router-link to="/">Inicio</router-link></li>
               <li><router-link to="/about">Acerca De</router-link></li>
               <li><a href="#services">Services</a></li>
-              <li><a href="#portfolio">Portfolio</a></li>
+              <li v-if="currentRol == 'admin'"><a href="#portfolio">Portfolio</a></li>
               <li v-if="authenticate" class="drop-down">
                 <a href="">Catálogos</a>
                 <ul>
@@ -206,6 +206,13 @@ export default {
       if(this.authenticate) {
         var r = JSON.parse(auth.getUserLogged());
         return r.user;
+      }
+      else return "";
+    },
+    currentRol() {
+      if(this.authenticate) {
+        var r = JSON.parse(auth.getUserLogged());
+        return r.rol;
       }
       else return "";
     }

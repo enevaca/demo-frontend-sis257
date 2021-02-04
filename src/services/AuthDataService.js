@@ -14,7 +14,7 @@ export default {
     await http.get(`/users/${user}/${password}`).then(response => {
       userDB = response.data;
       if (user === userDB.usuario && password === userDB.clave) {
-        const userCookie = { user: userDB.usuario };
+        const userCookie = { user: userDB.usuario, rol: userDB.rol };
         Cookies.set("userLogged", userCookie, { expires: (1 / 1440) * 30 }); //Expira en 30 minutos
         return userCookie;
       } else return "";
