@@ -62,11 +62,11 @@ export default {
     sendTask() {
       if (this.edit === false) {
         TasksDataService.create(this.task).then(() => {
-          //this.getTasks();
+          this.$router.push("/tasks");
         });
       } else {
         TasksDataService.update(this.taskToEdit, this.task).then(() => {
-          //this.getTasks();
+          this.$router.push("/tasks");
         });
       }
       this.edit = false;
