@@ -2,6 +2,8 @@
   "name": "frontend-sis257",
   "version": "0.1.0",
   "private": true,
+  "description": "vue js + axios + heroku",
+  "author": "enevaca",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

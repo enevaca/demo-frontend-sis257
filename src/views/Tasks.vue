@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="col-md-7">
-          <router-link to="/task-new">Crear Nuevo</router-link>
+          <router-link to="/task-new/0">Crear Nuevo</router-link>
           <table class="table table-bordered">
             <thead>
               <tr>
