@@ -23,7 +23,9 @@
               <li class="active"><router-link to="/">Inicio</router-link></li>
               <li><router-link to="/about">Acerca De</router-link></li>
               <li><a href="#services">Services</a></li>
-              <li v-if="currentRol == 'admin'"><a href="#portfolio">Portfolio</a></li>
+              <li v-if="currentRol == 'admin'">
+                <a href="#portfolio">Portfolio</a>
+              </li>
               <li v-if="authenticate" class="drop-down">
                 <a href="">Catálogos</a>
                 <ul>
@@ -44,8 +46,14 @@
                 </ul>
               </li>
               <li><a href="#contact">Contact</a></li>
-              <li v-if="authenticate"><a href="#contact">Hola {{ currentUser }}</a></li> 
-              <li v-if="authenticate" class="get-started"><router-link to="/login" @click="logout()">Cerrar Sesión</router-link></li>
+              <li v-if="authenticate">
+                <a href="#contact">Hola {{ currentUser }}</a>
+              </li>
+              <li v-if="authenticate" class="get-started">
+                <router-link to="/login" @click="logout()"
+                  >Cerrar Sesión</router-link
+                >
+              </li>
             </ul>
           </nav>
           <!-- .nav-menu -->
@@ -56,23 +64,23 @@
     <!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-      <div
-        class="container text-center position-relative"
-        data-aos="fade-in"
-        data-aos-delay="200"
-      >
-        <h1>Your New Online Presence with Bethany</h1>
-        <h2>
-          We are team of talanted designers making websites with Bootstrap
-        </h2>
-        <a href="#about" class="btn-get-started scrollto">Get Started</a>
-      </div>
-    </section>
+      <section id="hero" class="d-flex align-items-center">
+        <div
+          class="container text-center position-relative"
+          data-aos="fade-in"
+          data-aos-delay="200"
+        >
+          <h1>Your New Online Presence with Bethany</h1>
+          <h2>
+            We are team of talanted designers making websites with Bootstrap
+          </h2>
+          <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        </div>
+      </section>
     <!-- End Hero -->
 
     <main id="main">
-      <router-view @update-user="updateUser" />
+      <router-view @update-user="updateUser" @showImg="showImg" />
     </main>
 
     <!-- ======= Footer ======= -->
@@ -184,13 +192,14 @@
   </div>
 </template>
 <script>
-import auth from './services/AuthDataService';
+import auth from "./services/AuthDataService";
 
 export default {
   data() {
     return {
-      authenticate: auth.getUserLogged()
-    }
+      authenticate: auth.getUserLogged(),
+      showImgMain: true
+    };
   },
   methods: {
     logout() {
@@ -199,23 +208,24 @@ export default {
     },
     updateUser(user) {
       this.authenticate = user;
+    },
+    showImg(show) {
+      this.showImgMain = show;
     }
   },
   computed: {
     currentUser() {
-      if(this.authenticate) {
+      if (this.authenticate) {
         var r = JSON.parse(auth.getUserLogged());
         return r.user;
-      }
-      else return "";
+      } else return "";
     },
     currentRol() {
-      if(this.authenticate) {
+      if (this.authenticate) {
         var r = JSON.parse(auth.getUserLogged());
         return r.rol;
-      }
-      else return "";
+      } else return "";
     }
   }
-}
+};
 </script>

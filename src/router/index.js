@@ -18,13 +18,11 @@ const routes = [
     path: "/tasks",
     name: "Tasks",
     component: () =>
-      import(/* webpackChunkName: "tasks" */ "../views/Tasks.vue"),
-  },
-  {
-    path: "/task-new/:id",
-    name: "TasksNew",
-    component: () =>
-      import(/* webpackChunkName: "tasks" */ "../views/TasksNew.vue")
+      import(/* webpackChunkName: "tasks" */ "../components/task/TaskIndex.vue"),
+    children: [
+      { path: "create", name: "TaskCreate", component: () => import("../components/task/TaskCreate.vue") },
+      { path: "edit/:id", name: "TaskEdit", component: () => import("../components/task/TaskEdit.vue") }
+    ]
   },
   {
     path: "/login",
