@@ -7,6 +7,14 @@
             <div class="card-body">
               <form @submit.prevent="sendTask">
                 <div class="form-group">
+                  <label for="id_tipo_tarea">Tipo de Tarea</label>
+                  <select v-model="task.id_tipo_tarea" id="id_tipo_tarea" class="form-control">
+                    <option v-for="tipo in tipoTareas" :value="tipo.id" :key="tipo.id">
+                      {{ tipo.descripcion }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
                   <input
                     type="text"
                     v-model="task.nombre"
@@ -41,12 +49,14 @@
               <tr>
                 <th>Tarea</th>
                 <th>Descripción</th>
+                <th>Tipo Tarea</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="task in tasks" :key="task.id">
                 <td>{{ task.nombre }}</td>
                 <td>{{ task.descripcion }}</td>
+                <td>{{ task.tipo_tarea }}</td>
                 <td>
                   <button @click="editTask(task.id)" class="btn btn-primary">
                     Editar
@@ -66,20 +76,25 @@
 
 <script>
 import TasksDataService from "../services/TaskDataService";
+import TypeTaskDataService from "../services/TypeTaskDataService";
 
 export default {
   data() {
     return {
       task: {
         nombre: "",
-        descripcion: ""
+        descripcion: "",
+        id_tipo_tarea: 0,
+        tipo_tarea: ""
       },
       tasks: [],
       edit: false,
-      taskToEdit: 0
+      taskToEdit: 0,
+      tipoTareas: []
     };
   },
   created() {
+    this.getTypeTasks();
     this.getTasks();
   },
   methods: {
@@ -96,6 +111,7 @@ export default {
       this.edit = false;
       this.task.nombre = "";
       this.task.descripcion = "";
+      this.task.id_tipo_tarea = 0;
     },
     getTasks() {
       TasksDataService.getAll().then(response => {
@@ -106,6 +122,7 @@ export default {
       TasksDataService.get(id).then(response => {
         this.task.nombre = response.data.nombre;
         this.task.descripcion = response.data.descripcion;
+        this.task.id_tipo_tarea = response.data.id_tipo_tarea;
         this.taskToEdit = response.data.id;
         this.edit = true;
       });
@@ -114,7 +131,12 @@ export default {
       TasksDataService.delete(id).then(() => {
         this.getTasks();
       });
-    }
+    },
+    getTypeTasks() {
+      TypeTaskDataService.getAll().then(response => {
+        this.tipoTareas = response.data;
+      });
+    },
   }
 };
 </script>
