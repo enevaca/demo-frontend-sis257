@@ -13,10 +13,10 @@
     </nav>
 
     <div class="row">
-        <div class="col-12">
-          <h2 class="text-center">Crear Nueva Tarea</h2>
-        </div>
+      <div class="col-12">
+        <h2 class="text-center">Crear Nueva Tarea</h2>
       </div>
+    </div>
 
     <div class="row d-flex justify-content-center">
       <div class="col-md-6">
@@ -69,7 +69,7 @@
       </div>
     </div>
     <button type="button" @click="goBack()" class="btn btn-link">
-      <i class='bx bx-left-arrow-alt'></i> Volver
+      <i class="bx bx-left-arrow-alt"></i> Volver
     </button>
   </div>
 </template>
@@ -98,13 +98,14 @@ export default {
     sendTask() {
       if (this.taskToEdit === 0) {
         TasksDataService.create(this.task).then(() => {
-          this.$router.push("/tasks")
+          this.$router.push("/tasks");
         });
       } else {
         TasksDataService.update(this.taskToEdit, this.task).then(() => {
-          this.$router.push("/tasks")
+          this.$router.push("/tasks");
         });
       }
+
       this.task.nombre = "";
       this.task.descripcion = "";
       this.task.id_tipo_tarea = 0;

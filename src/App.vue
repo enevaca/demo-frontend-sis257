@@ -64,19 +64,37 @@
     <!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-      <section id="hero" class="d-flex align-items-center">
-        <div
-          class="container text-center position-relative"
-          data-aos="fade-in"
-          data-aos-delay="200"
-        >
-          <h1>Your New Online Presence with Bethany</h1>
-          <h2>
-            We are team of talanted designers making websites with Bootstrap
-          </h2>
-          <a href="#about" class="btn-get-started scrollto">Get Started</a>
-        </div>
-      </section>
+    <section
+      v-if="showImgMain == true"
+      id="hero"
+      class="d-flex align-items-center"
+    >
+      <div
+        class="container text-center position-relative"
+        data-aos="fade-in"
+        data-aos-delay="200"
+      >
+        <h1>Desarrollo de Aplicaciones Int/Internet II</h1>
+        <h2>SIS257 - Carrera de Informática</h2>
+        <a href="#about" class="btn-get-started scrollto">Iniciar</a>
+      </div>
+    </section>
+    <section
+      v-else
+      id="hero"
+      class="d-flex align-items-center"
+      style="height:180px"
+    >
+      <div
+        class="container text-center position-relative"
+        data-aos="fade-in"
+        data-aos-delay="200"
+      >
+        <hr />
+        <h1>Desarrollo de Aplicaciones Int/Internet II</h1>
+        <h2>SIS257 - Carrera de Informática</h2>
+      </div>
+    </section>
     <!-- End Hero -->
 
     <main id="main">
@@ -89,7 +107,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-3 col-md-6 footer-contact">
-              <h3>Bethany</h3>
+              <h3>SIS257</h3>
               <p>
                 A108 Adam Street <br />
                 New York, NY 535022<br />
